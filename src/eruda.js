@@ -6,4 +6,5 @@ eruda.init();
 eruda.add(erudaCode);
 eruda.add(erudaDom);
 
+// eslint-disable-next-line import/no-default-export
 export default eruda
