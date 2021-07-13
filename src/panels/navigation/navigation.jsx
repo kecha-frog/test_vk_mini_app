@@ -5,24 +5,19 @@ import { Link, useParams } from 'react-router-dom';
 export const Navigation = () => {
   const { params } = useParams();
 
+
   return (
     <>
       <SubnavigationBar>
-        <SubnavigationButton selected={params === 'news'}>
-          <Link to="/news">
-            news
-          </Link>
-        </SubnavigationButton>
-        <SubnavigationButton selected={params === 'chat'}>
-          <Link to="/chat">
-            chat
-          </Link>
-        </SubnavigationButton>
-        <SubnavigationButton selected={params === 'matches'}>
-          <Link to="/matches">
-            matches
-          </Link>
-        </SubnavigationButton>
+        <Link to="/news">
+          <SubnavigationButton selected={params === 'news'}>news</SubnavigationButton>
+        </Link>
+        <Link to="/chat">
+          <SubnavigationButton selected={params === 'chat'}>chat</SubnavigationButton>
+        </Link>
+        <Link to="/matches">
+          <SubnavigationButton selected={params === 'matches'}>matches</SubnavigationButton>
+        </Link>
       </SubnavigationBar>
     </>
   );

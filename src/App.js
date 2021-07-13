@@ -5,9 +5,8 @@ import {
 } from '@vkontakte/vkui';
 import React, { useState, useEffect } from 'react';
 import '@vkontakte/vkui/dist/vkui.css';
-import { Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ChatLyaout } from './panels/chat/chatLyaout';
-import { MainLyaout } from './panels/mainLyaout/mainLyaout';
 import { MatchesLyaout } from './panels/matches/matchesLyaout';
 import { Navigation } from './panels/navigation/navigation';
 import { NewsLyaout } from './panels/news/newsLyaout';
@@ -19,7 +18,12 @@ export const App = () => {
   const [popout, setPopout] = useState(null); /* <ScreenSpinner size='large' /> */
 
   useEffect(() => {
-    bridge.subscribe(({ detail: { type, data } }) => {
+    bridge.subscribe(({
+      detail: {
+        type,
+        data
+      }
+    }) => {
       if (type === 'VKWebAppUpdateConfig') {
         const schemeAttribute = document.createAttribute('scheme');
         schemeAttribute.value = data.scheme ? data.scheme : 'client_light';
@@ -41,20 +45,27 @@ export const App = () => {
   };
 
   return (
-    <AdaptivityProvider>
-      <AppRoot>
-        <Switch>
+    <BrowserRouter>
+      <AdaptivityProvider>
+        <AppRoot>
           <Route path={['/:params', '/']}>
-            <MainLyaout
-              navigation={<Navigation />}
-              chatLyaout={<ChatLyaout />}
-              newsLyaout={<NewsLyaout activePanel={activePanel} setActivePanel={setActivePanel} />}
-              matchesLyaout={<MatchesLyaout activePanel={activePanel} activeModal={activeModal} setActiveModal={setActiveModal} />}
-            />
+            <Navigation/>
           </Route>
-        </Switch>
-      </AppRoot>
-    </AdaptivityProvider>
+          <Switch>
+            <Route path={'/chat'}>
+              <ChatLyaout/>
+            </Route>
+            <Route path={'/news'}>
+              <NewsLyaout activePanel={activePanel} setActivePanel={setActivePanel}/>
+            </Route>
+            <Route path={['/matches', '/matches&:game']}>
+              <MatchesLyaout activePanel={activePanel} activeModal={activeModal}
+                             setActiveModal={setActiveModal}/>
+            </Route>
+          </Switch>
+        </AppRoot>
+      </AdaptivityProvider>
+    </BrowserRouter>
   );
 };
 

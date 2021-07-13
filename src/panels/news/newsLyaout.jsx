@@ -21,6 +21,6 @@ export const NewsLyaout = (props) => {
 };
 
 NewsLyaout.propTypes = {
-  activePanel: PropTypes.func,
+  activePanel: PropTypes.string,
   setActivePanel: PropTypes.func,
 };

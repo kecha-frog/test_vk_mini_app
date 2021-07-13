@@ -7,10 +7,10 @@ import { NavMatches } from './navMatches';
 export const MatchesLyaout = (props) => {
   const { activeModal, setActiveModal, activePanel } = props;
 
-  const matches = [{ header: 'match 0', id: 'match_0' }, { header: 'match 1', id: 'match_1' }, {
+  const matches = [{ header: 'match 0', id: 'match_0', game:"wot" }, { header: 'match 1', id: 'match_1', game:"csgo" }, {
     header: 'match 2',
-    id: 'match_2',
-  }, { header: 'match 3', id: 'match_3' }, { header: 'match 4', id: 'match_4' }];
+    id: 'match_2', game:"dota"
+  }, { header: 'match 3', id: 'match_3', game:"csgo" }, { header: 'match 4', id: 'match_4', game:"wot" }];
 
   const modal = (
     <ModalRoot
@@ -22,7 +22,7 @@ export const MatchesLyaout = (props) => {
           id={value.id}
           onClose={() => setActiveModal(null)}
           icon={<Icon56MoneyTransferOutline />}
-          header={value.header}
+          header={value.header +" " + value.game}
           subheader="0 : 0"
         />
       ))}
@@ -37,7 +37,7 @@ export const MatchesLyaout = (props) => {
 };
 
 MatchesLyaout.propTypes = {
-  activeModal: PropTypes.func,
+  activeModal: PropTypes.string,
   setActiveModal: PropTypes.func,
-  activePanel: PropTypes.func,
+  activePanel: PropTypes.string,
 };

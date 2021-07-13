@@ -16,7 +16,7 @@ export const News = (props) => {
 };
 
 News.propTypes = {
-  news: PropTypes.array,
+  news: PropTypes.string,
   setActivePanel: PropTypes.func,
   id: PropTypes.string,
 };
